@@ -1,0 +1,35 @@
+:root {
+  /* 색상 */
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #666666;
+  --color-accent: #000000;
+  --color-border: #e5e5e5;
+
+  /* 타이포그래피 */
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, "Noto Sans KR", sans-serif;
+
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 32px;
+  --text-2xl: 48px;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.6;
+
+  /* 간격 */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 48px;
+  --space-5: 96px;
+
+  /* 레이아웃 */
+  --max-width: 1280px;
+  --gutter: 24px;
+
+  /* 애니메이션 */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 150ms;
+}
