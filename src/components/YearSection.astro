@@ -1,0 +1,29 @@
+---
+import WorkGrid from './WorkGrid.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  year: number;
+  works: CollectionEntry<'works'>[];
+};
+
+const { year, works } = Astro.props;
+---
+
+<section id={`year-${year}`} class="year-section">
+  <h2>{year}</h2>
+  <WorkGrid works={works} />
+</section>
+
+<style>
+  .year-section {
+    margin-bottom: var(--space-5);
+    scroll-margin-top: 80px;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+    color: var(--color-muted);
+  }
+</style>
