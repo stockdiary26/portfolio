@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+type Props = {
+  images: { src: ImageMetadata; caption?: string }[];
+};
+
+const { images } = Astro.props;
+---
+
+<section class="gallery">
+  <div class="container">
+    {images.map((img) => (
+      <figure>
+        <Image src={img.src} alt={img.caption ?? ''} widths={[800, 1200, 1600]} sizes="(max-width: 1024px) 100vw, 1024px" />
+        {img.caption && <figcaption>{img.caption}</figcaption>}
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style>
+  .gallery {
+    padding: var(--space-3) 0;
+  }
+
+  .container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  figure :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+</style>

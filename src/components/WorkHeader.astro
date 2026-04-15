@@ -1,0 +1,46 @@
+---
+type Props = {
+  title: string;
+  year: number;
+  summary: string;
+};
+
+const { title, year, summary } = Astro.props;
+---
+
+<header class="work-header">
+  <div class="container">
+    <p class="year">{year}</p>
+    <h1>{title}</h1>
+    <p class="summary">{summary}</p>
+  </div>
+</header>
+
+<style>
+  .work-header {
+    padding: var(--space-4) 0 var(--space-3);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .year {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-1);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .summary {
+    font-size: var(--text-lg);
+    color: var(--color-muted);
+    max-width: 700px;
+  }
+</style>

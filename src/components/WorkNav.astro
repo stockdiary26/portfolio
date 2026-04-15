@@ -1,0 +1,66 @@
+---
+type Props = {
+  prev: { slug: string; title: string } | null;
+  next: { slug: string; title: string } | null;
+};
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="work-nav">
+  <div class="container">
+    <div class="side">
+      {prev && (
+        <a href={`/works/${prev.slug}`}>
+          <span class="label">← Previous</span>
+          <span class="title">{prev.title}</span>
+        </a>
+      )}
+    </div>
+    <div class="side right">
+      {next && (
+        <a href={`/works/${next.slug}`}>
+          <span class="label">Next →</span>
+          <span class="title">{next.title}</span>
+        </a>
+      )}
+    </div>
+  </div>
+</nav>
+
+<style>
+  .work-nav {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-4) 0;
+    margin-top: var(--space-4);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .side.right {
+    text-align: right;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .title {
+    font-size: var(--text-base);
+    font-weight: 600;
+  }
+</style>
