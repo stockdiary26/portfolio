@@ -44,11 +44,15 @@ summary: "한 줄 요약"
 
 ## 스키마 필수 필드
 
-- `title`, `slug` (kebab-case), `year` (정수), `thumbnail`, `summary`
-- `images` 최소 1장
-- `order` (기본 0) — 같은 연도 내 정렬 (작을수록 먼저)
+Zod 스키마(`src/content/config.ts`)가 강제하는 필드:
 
-누락·오류 시 `npm run check` 또는 빌드에서 실패하므로 푸시 전 확인하면 안전하다.
+- `title`, `year` (정수, 2000~2100), `thumbnail`, `summary` — 필수
+- `images` — 최소 1장 필수
+- `order` — 선택 (기본 0). 같은 연도 내 정렬 (작을수록 먼저)
+
+누락·오류 시 `npm run check` 또는 빌드에서 실패한다.
+
+**`slug`에 대한 주의:** `slug`는 Astro가 예약한 최상위 필드라 Zod 스키마 밖에서 관리된다. frontmatter에 `slug: "my-slug"`로 지정하면 URL이 `/works/my-slug`가 된다. 생략하면 파일명에서 자동 추출되어 `/works/2026-my-project`처럼 연도 접두사가 URL에 남는다. **항상 `slug`를 명시하는 것을 권장**한다 (깔끔한 URL + 파일명 변경 내성).
 
 ## 배포
 
