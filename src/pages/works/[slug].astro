@@ -1,0 +1,42 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import WorkHeader from '../../components/WorkHeader.astro';
+import ImageGallery from '../../components/ImageGallery.astro';
+import WorkNav from '../../components/WorkNav.astro';
+import { getAdjacentWorks } from '../../lib/work-query';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((work) => ({
+    params: { slug: work.slug },
+    props: { work, allWorks: works },
+  }));
+}
+
+type Props = {
+  work: CollectionEntry<'works'>;
+  allWorks: CollectionEntry<'works'>[];
+};
+
+const { work, allWorks } = Astro.props;
+const { title, year, summary, images } = work.data;
+
+const flat = allWorks.map((w) => ({
+  slug: w.slug,
+  year: w.data.year,
+  order: w.data.order,
+  title: w.data.title,
+}));
+
+const { prev, next } = getAdjacentWorks(flat, work.slug);
+---
+
+<Layout title={`${title} — Portfolio`} description={summary}>
+  <WorkHeader title={title} year={year} summary={summary} />
+  <ImageGallery images={images} />
+  <WorkNav
+    prev={prev ? { slug: prev.slug, title: prev.title } : null}
+    next={next ? { slug: next.slug, title: next.title } : null}
+  />
+</Layout>
