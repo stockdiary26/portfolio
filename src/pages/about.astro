@@ -1,0 +1,61 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const about = await getEntry('about', 'about');
+if (!about) throw new Error('about content not found');
+const { Content } = await about.render();
+---
+
+<Layout title="About — Portfolio">
+  <article class="about">
+    <div class="container">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .about {
+    padding: var(--space-4) 0;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .container :global(h1) {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .container :global(h2) {
+    font-size: var(--text-xl);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+
+  .container :global(p),
+  .container :global(li) {
+    margin-bottom: var(--space-1);
+    color: var(--color-text);
+  }
+
+  .container :global(ul) {
+    margin-bottom: var(--space-3);
+  }
+
+  .container :global(li) {
+    padding-left: var(--space-2);
+    position: relative;
+  }
+
+  .container :global(li)::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-muted);
+  }
+</style>
