@@ -1,0 +1,75 @@
+---
+const pathname = Astro.url.pathname;
+const links = [
+  { href: '/works', label: 'Works' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header>
+  <div class="container">
+    <a href="/" class="brand">Portfolio</a>
+    <nav>
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[{ active: pathname.startsWith(link.href) }]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-2) var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
+  nav ul {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  nav a {
+    color: var(--color-muted);
+    font-size: var(--text-base);
+    transition: color var(--dur-short) var(--ease-out);
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  @media (max-width: 480px) {
+    nav ul {
+      gap: var(--space-2);
+    }
+  }
+</style>
