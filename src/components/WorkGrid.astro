@@ -1,0 +1,34 @@
+---
+import WorkCard from './WorkCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  works: CollectionEntry<'works'>[];
+};
+
+const { works } = Astro.props;
+---
+
+<div class="grid">
+  {works.map((work) => <WorkCard work={work} />)}
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 1023px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
