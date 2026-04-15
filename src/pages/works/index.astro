@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import YearNav from '../../components/YearNav.astro';
+import YearSection from '../../components/YearSection.astro';
+import { groupWorksByYear } from '../../lib/work-query';
+
+const works = await getCollection('works');
+const flat = works.map((w) => ({
+  slug: w.slug,
+  year: w.data.year,
+  order: w.data.order,
+  entry: w,
+}));
+
+const grouped = groupWorksByYear(flat);
+const years = grouped.map((g) => g.year);
+---
+
+<Layout title="Works — Portfolio">
+  <div class="container">
+    <h1>Works</h1>
+    <YearNav years={years} />
+    {grouped.map((group) => (
+      <YearSection
+        year={group.year}
+        works={group.works.map((w) => w.entry)}
+      />
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-4) var(--gutter);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-4);
+  }
+</style>

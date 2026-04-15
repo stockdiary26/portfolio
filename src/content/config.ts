@@ -5,7 +5,6 @@ const works = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string().min(1),
-      slug: z.string().regex(/^[a-z0-9-]+$/, 'slug must be kebab-case'),
       year: z.number().int().min(2000).max(2100),
       order: z.number().int().default(0),
       thumbnail: image(),
