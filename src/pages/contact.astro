@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const email = 'hello@example.com';
+---
+
+<Layout title="Contact — Portfolio">
+  <section class="contact">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>협업이나 문의는 이메일로 연락 주세요.</p>
+      <a href={`mailto:${email}`} class="email">{email}</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact {
+    padding: var(--space-5) 0;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-2);
+  }
+
+  p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .email {
+    display: inline-block;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-text);
+    padding-bottom: 2px;
+  }
+
+  .email:hover {
+    text-decoration: none;
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 — Portfolio">
+  <section class="notfound">
+    <div class="container">
+      <h1>404</h1>
+      <p>존재하지 않는 페이지입니다.</p>
+      <a href="/works" class="back">작업물 목록으로 →</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    padding: var(--space-5) 0;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-2);
+  }
+
+  p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .back {
+    font-size: var(--text-base);
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-text);
+    padding-bottom: 2px;
+  }
+
+  .back:hover {
+    text-decoration: none;
+  }
+</style>
