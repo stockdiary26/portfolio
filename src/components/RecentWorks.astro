@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import WorkGrid from './WorkGrid.astro';
+import { sortWorks } from '../lib/work-query';
+
+const all = await getCollection('works');
+const sorted = sortWorks(
+  all.map((w) => ({
+    slug: w.slug,
+    year: w.data.year,
+    order: w.data.order,
+    entry: w,
+  })),
+);
+const recent = sorted.slice(0, 4).map((w) => w.entry);
+---
+
+<section class="recent">
+  <div class="container">
+    <div class="head">
+      <h2>Recent Works</h2>
+      <a href="/works">All works →</a>
+    </div>
+    <WorkGrid works={recent} />
+  </div>
+</section>
+
+<style>
+  .recent {
+    padding: var(--space-4) 0;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-3);
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+  }
+
+  .head a {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+</style>
